@@ -8,9 +8,20 @@ export const theme = createTheme({
   palette: {
     primary: {
       main: "#006400",
+      light: "#338a33",
+      dark: "#004d00",
     },
     secondary: {
       main: "#ff5722",
+    },
+  },
+  components: {
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          width: 320,
+        },
+      },
     },
   },
 });

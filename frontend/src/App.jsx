@@ -11,6 +11,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './theme/theme';
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
+import { AppProvider } from "@toolpad/core/AppProvider";
 
 function App() {
   const { fetchUser, fetchingUser } = useAuthStore();
@@ -24,6 +25,7 @@ function App() {
   } 
 
   return (
+    <AppProvider>
     <ThemeProvider theme={theme}>
       <Toaster />
       <Navbar />
@@ -37,6 +39,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
       </Routes>
     </ThemeProvider>
+    </AppProvider>
   );
 }
 
