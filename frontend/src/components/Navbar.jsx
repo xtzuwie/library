@@ -14,10 +14,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import InfoIcon from '@mui/icons-material/Info';
-import BookIcon from '@mui/icons-material/Book';
-import EmailIcon from '@mui/icons-material/Email';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
 import toast from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const theme = useTheme();
@@ -25,6 +26,7 @@ const Navbar = () => {
   const { user, logout } = useAuthStore();
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const location = useLocation();
 
   const handleMenu = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
@@ -73,15 +75,23 @@ const Navbar = () => {
             gap: 3
           }}
         >
-          <Link to="/about" title="About Us">
-            <InfoIcon sx={{ fontSize: 30 }} className="hover:text-blue-500" />
+          <Link to="/" title="Home">
+          <Box className={`flex items-center gap-1 cursor-pointer ${location.pathname === '/' ? 'text-blue-500 font-semibold underline underline-offset-4' : 'hover:text-blue-400'}`}>
+            <span className="text-md font-bold">Home</span>
+          <HomeIcon label="Home" sx={{ fontSize: 30 }} />
+          </Box>
           </Link>
           <Link to="/book" title="Books">
-            <BookIcon sx={{ fontSize: 30 }} className="hover:text-blue-500" />
-          </Link>
-          <Link to="/contact" title="Contact Us">
-            <EmailIcon sx={{ fontSize: 30 }} className="hover:text-blue-600" />
-          </Link>
+          <Box className={`flex items-center gap-1 cursor-pointer ${location.pathname === '/book' ? 'text-blue-500 font-semibold underline underline-offset-4' : 'hover:text-blue-400'}`}>
+            <span className="text-md font-bold">Books</span>
+          <LibraryBooksIcon sx={{ fontSize: 30 }} />
+          </Box>       
+           </Link>
+          <Link to="/about" title="Contact Us">
+          <Box className={`flex items-center gap-1 cursor-pointer ${location.pathname === '/about' ? 'text-green-500 font-semibold underline underline-offset-4' : 'hover:text-blue-400'}`}>
+            <span className="text-md font-bold">About Us</span>
+            <InfoIcon sx={{ fontSize: 30 }} />
+          </Box></Link>
         </Box>
 
         {/* Right-side Profile & Menu */}
@@ -134,7 +144,7 @@ const Navbar = () => {
       </Toolbar>
 
       {/* Drawer for mobile */}
-      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
+      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
         <Box sx={{ width: 250 }}>
           {menuItems.map((item) => (
             <MenuItem
