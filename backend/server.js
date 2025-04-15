@@ -33,7 +33,7 @@ app.post("/api/signup",async (req, res) => {
      const emailExists = await User.findOne({email});
 
      if(emailExists){
-        return res.status(400).json({message: "User already exists."})
+        return res.status(400).json({message: "Email already exists."})
      }
 
      const usernameExists = await User.findOne({username});
@@ -80,7 +80,7 @@ app.post("/api/login",async (req, res) => {
         const userDoc = await User.findOne({email});
 
         if(!userDoc) {
-            return res.status(400).json({message: "Invalid credentials." });
+            return res.status(400).json({message: "Please check your email or password" });
         }
 
         const isPasswordValid = await bcryptjs.compareSync(password, userDoc.password);
@@ -140,7 +140,7 @@ app.get("/api/fetch-user", async (req, res) => {
 // Logout 
 app.post("/api/logout", async (req, res) => {
     res.clearCookie("token");
-    res.status(200).json({ message: "Logged out successfully" });
+    res.status(200).json({ message: "You have successfully logged out" });
 });
 
 app.listen(PORT,async () => {
