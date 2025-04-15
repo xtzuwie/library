@@ -80,16 +80,31 @@ const Navbar = () => {
             gap: 3
           }}
         >
-          <Link to="/" title="Home">
-            <Box
-              className={`flex items-center gap-1 cursor-pointer ${
-                location.pathname === '/' ? 'text-blue-400 font-semibold underline underline-offset-4' : 'hover:text-orange-200'
-              }`}
-            >
-              <span className="text-md font-bold">Home</span>
-              <HomeIcon sx={{ fontSize: 30 }} />
-            </Box>
-          </Link>
+          {!user && (
+            <>
+              <Link to="/" title="Home">
+                <Box
+                  className={`flex items-center gap-1 cursor-pointer ${
+                    location.pathname === '/' ? 'text-blue-400 font-semibold underline underline-offset-4' : 'hover:text-orange-200'
+                  }`}
+                >
+                  <span className="text-md font-bold">Home</span>
+                  <HomeIcon sx={{ fontSize: 30 }} />
+                </Box>
+              </Link>
+
+              <Link to="/about" title="About Us">
+                <Box
+                  className={`flex items-center gap-1 cursor-pointer ${
+                    location.pathname === '/about' ? 'text-blue-400 font-semibold underline underline-offset-4' : 'hover:text-orange-200'
+                  }`}
+                >
+                  <span className="text-md font-bold">About Us</span>
+                  <InfoIcon sx={{ fontSize: 30 }} />
+                </Box>
+              </Link>
+            </>
+          )}
 
           <Link to="/book" title="Books">
             <Box
@@ -99,17 +114,6 @@ const Navbar = () => {
             >
               <span className="text-md font-bold">Books</span>
               <LibraryBooksIcon sx={{ fontSize: 30 }} />
-            </Box>
-          </Link>
-
-          <Link to="/about" title="About Us">
-            <Box
-              className={`flex items-center gap-1 cursor-pointer ${
-                location.pathname === '/about' ? 'text-blue-400 font-semibold underline underline-offset-4' : 'hover:text-orange-200'
-              }`}
-            >
-              <span className="text-md font-bold">About Us</span>
-              <InfoIcon sx={{ fontSize: 30 }} />
             </Box>
           </Link>
         </Box>
@@ -220,15 +224,19 @@ const Navbar = () => {
               {item.label}
             </MenuItem>
           ))}
-          <Link to="/about">
-            <MenuItem>About Us</MenuItem>
-          </Link>
           <Link to="/book">
             <MenuItem>Books</MenuItem>
           </Link>
-          <Link to="/contact">
-            <MenuItem>Contact Us</MenuItem>
-          </Link>
+          {!user && (
+            <>
+              <Link to="/about">
+                <MenuItem>About Us</MenuItem>
+              </Link>
+              <Link to="/contact">
+                <MenuItem>Contact Us</MenuItem>
+              </Link>
+            </>
+          )}
         </Box>
       </Drawer>
     </AppBar>
