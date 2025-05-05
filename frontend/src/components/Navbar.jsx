@@ -232,7 +232,7 @@ const Navbar = () => {
           ))}
           {/* Add Books MenuItem - only visible for logged in users */}
           {user && (
-            <Link to="/addbooks">
+            <Link to="/inventory">
               <MenuItem>Add Books</MenuItem>
             </Link>
           )}
